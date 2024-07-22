@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/index.css"; // Asegúrate de que el CSS esté importado
 
@@ -25,7 +26,7 @@ export const Planets = () => {
 
     return (
         <div className="container mb-5">
-            <h2 style={{ color: "yellow" }}>Lista de Planetas</h2>
+            <h2 style={{ color: "yellow" }}>Planets</h2>
             <div className="row">
                 <div className="col">
                     <div className="carousel slide" id="carouselExampleControls" data-bs-ride="carousel" style={{ position: "relative" }}>
@@ -57,8 +58,15 @@ export const Planets = () => {
                                                             </div>
                                                         </div>
                                                         <div className="bottom-bottom">
-                                                            <button className="more">Learn more</button>
-                                                            <button className="heart"><i className="fa-regular fa-heart"></i></button>
+                                                            <Link to={`/details/${planet.name}`}>
+                                                                <button className="btn btn-primary">Learn more</button>
+                                                            </Link>
+                                                            <button
+                                                                className="heart"
+                                                                onClick={() => actions.addFavorite(planet)}
+                                                            >
+                                                                <i className={`fa-heart ${store.favourites.some(fav => fav.name === planet.name) ? 'fas' : 'far'}`}></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>

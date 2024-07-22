@@ -7,9 +7,9 @@ import Vehicles from "./vehicles.jsx";
 
 export const Home = () => (
 	<div className="text-center mt-5">
-		
-		<Vehicles/>
+		<Planets/>	
 		<Characters/>
-		<Planets/>
+		<Vehicles/>
+
 	</div>
 );

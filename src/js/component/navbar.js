@@ -1,59 +1,59 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-expand-sm">
-    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
-      <span className="navbar-toggler-icon" ></span>
-    </button>
-    
-    
-    
-    <div className="collapse navbar-collapse d-flex flex-column" id="opciones">   
-	<div className="navsuperior container-fluid d-flex align-items-center justify-content-between">
-		<div className="social d-flex">
-			<a><i className="fa-brands fa-github"></i></a>
-			<a><i className="fa-brands fa-linkedin"></i></a>
-			<a><i className="fa-brands fa-github"></i></a>
-		</div>
-		<div className="navbar-brand" href="#">
-			<img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Star_Wars_Logo.svg" height="90" alt="" className="logo"/>
-		</div>
-		<div>
-		<form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-warning" type="submit">Search</button>
-      </form>
-	  </div>
-	</div>
-      <ul className="navbar-nav">
-        <li className="nav-item">
-			<Link to="/" className="nav-link">
-				<i className="fa-solid fa-house"></i> <span className="ms-1 d-none d-sm-inline">Home</span>
-			</Link> 
-        </li>
+    const { store, actions } = useContext(Context);
 
-        <li className="nav-item">
-			<Link to="/" className="nav-link">
-				<i className="fa-solid fa-earth-americas"></i> <span className="ms-1 d-none d-sm-inline">Planets</span>
-			</Link>
-        </li>
-
-        <li className="nav-item">
-			<Link to="/" className="nav-link">
-		  		<i className="fa-solid fa-shuttle-space"></i> <span className="ms-1 d-none d-sm-inline">Vehicles</span>
-		  	</Link>
-        </li>
-
-        <li className="nav-item">
-			<Link to="/" className="nav-link">
-				<i className="fa-solid fa-user-astronaut"></i> <span className="ms-1 d-none d-sm-inline">Characters</span>
-			</Link>
-        </li>            
-      </ul>
-	  
-    </div>
-  </nav>
-	);
+    return (
+        <nav className="navbar navbar-expand-lg navbar-dark">
+            <div className="container">
+                <Link to="/" className="navbar-brand">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6MK34zw_YfhT1F26_4dFyF5Rc8v8_ZexPg&s" alt="Star Wars" className="star-wars-logo" />
+                </Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav me-auto">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/planets" className="nav-link">Planets</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/vehicles" className="nav-link">Vehicles</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/characters" className="nav-link">Characters</Link>
+                        </li>
+                    </ul>
+                    <div className="d-flex">
+                        <div className="dropdown">
+                            <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Favorites <span className="badge bg-secondary">{store.favourites.length}</span>
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                {store.favourites.length === 0 ? (
+                                    <li><span className="dropdown-item">No favorites yet</span></li>
+                                ) : (
+                                    store.favourites.map((item, index) => (
+                                        <li key={index}>
+                                            <span className="dropdown-item">
+                                                {item.name}
+                                                <button className="btn btn-sm btn-danger ms-2" onClick={() => actions.removeFavorite(index)}>
+                                                    <i className="fas fa-trash"></i>
+                                                </button>
+                                            </span>
+                                        </li>
+                                    ))
+                                )}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    );
 };

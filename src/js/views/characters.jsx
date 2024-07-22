@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 import "../../styles/index.css"; // Asegúrate de que el CSS esté importado
 
 export const Characters = () => {
@@ -25,7 +26,7 @@ export const Characters = () => {
 
     return (
         <div className="container">
-            <h2 style={{ color: "yellow" }}>Lista de Personajes</h2>
+            <h2 style={{ color: "yellow" }}>Characters</h2>
             <div className="carousel slide" id="carouselExampleControls" data-bs-ride="carousel" style={{ position: "relative" }}>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
@@ -47,16 +48,23 @@ export const Characters = () => {
                                                 <div className="content">
                                                     <div className="name">{character.name}</div>
                                                     <div className="about-me">
-                                                    <ul className="no-bullets">
-                                                    <li><strong>Height:</strong> {character.result.properties.height || 'N/A'}</li>
+                                                        <ul className="no-bullets">
+                                                            <li><strong>Height:</strong> {character.result.properties.height || 'N/A'}</li>
                                                             <li><strong>Birth Year:</strong> {character.result.properties.birth_year || 'N/A'}</li>
                                                             <li><strong>Gender:</strong> {character.result.properties.gender || 'N/A'}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div className="bottom-bottom">
-                                                    <button className="more">Learn more</button>
-                                                    <button className="heart"><i className="fa-regular fa-heart"></i></button>
+                                                <Link to={`/detailsCharacters/${character.name}`}>
+                                                                <button className="btn btn-primary">Learn more</button>
+                                                            </Link>
+                                                    <button
+                                                        className="heart"
+                                                        onClick={() => actions.addFavorite(character)}
+                                                    >
+                                                        <i className={`fa-heart ${store.favourites.some(fav => fav.name === character.name) ? 'fas' : 'far'}`}></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

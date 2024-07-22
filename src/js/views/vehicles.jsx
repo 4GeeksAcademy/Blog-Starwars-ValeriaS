@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // Asegúrate de importar Link
 import { Context } from "../store/appContext";
 import "../../styles/index.css"; // Asegúrate de que el CSS esté importado
 
@@ -25,7 +26,7 @@ export const Vehicles = () => {
 
     return (
         <div className="container">
-            <h2 style={{ color: "yellow" }}>Lista de Vehículos</h2>
+            <h2 style={{ color: "yellow" }}>Vehicles</h2>
             <div className="row">
                 <div className="col">
                     <div className="carousel slide" id="carouselExampleControls" data-bs-ride="carousel" style={{ position: "relative" }}>
@@ -49,16 +50,23 @@ export const Vehicles = () => {
                                                         <div className="content">
                                                             <div className="name">{vehicle.name}</div>
                                                             <div className="about-me">
-                                                            <ul className="no-bullets">
-                                                            <li><strong>Class:</strong> {vehicle.result.properties.vehicle_class || 'N/A'}</li>
+                                                                <ul className="no-bullets">
+                                                                    <li><strong>Class:</strong> {vehicle.result.properties.vehicle_class || 'N/A'}</li>
                                                                     <li><strong>Manufacturer:</strong> {vehicle.result.properties.manufacturer || 'N/A'}</li>
                                                                     <li><strong>Cargo Capacity:</strong> {vehicle.result.properties.cargo_capacity || 'N/A'}</li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <div className="bottom-bottom">
-                                                            <button className="more">Learn more</button>
-                                                            <button className="heart"><i className="fa-regular fa-heart"></i></button>
+                                                            <Link to={`/detailsVehicles/${vehicle.name}`}>
+                                                                <button className="btn btn-primary">Learn more</button>
+                                                            </Link>
+                                                            <button
+                                                                className="heart"
+                                                                onClick={() => actions.addFavorite(vehicle)}
+                                                            >
+                                                                <i className={`fa-heart ${store.favourites.some(fav => fav.name === vehicle.name) ? 'fas' : 'far'}`}></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
