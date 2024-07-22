@@ -1,3 +1,182 @@
-/* 
-    General Styles
-*/
+.layout {
+  background-image: url("https://getwallpapers.com/wallpaper/full/a/0/0/30135.jpg");
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
+
+.navbar {
+  background-color: transparent;
+  color: white;
+  font-size: 1.5em;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px; /* Ajusta el grosor del borde según lo necesites */
+  background-color: rgba(255, 255, 255, 0.5); /* Color del borde con transparencia */
+}
+
+.logo {
+  margin-left: 5em;
+}
+
+h2 {
+  font-family: 'Star Wars', sans-serif;
+}
+
+a:link, a:visited, a:active {
+  text-decoration: none;
+  color: white;
+  font-family: 'Star Wars', sans-serif;
+}
+
+.content-wrapper {
+  display: flex;
+}
+
+.scrolling-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.card {
+  width: 320px; /* Tamaño de la tarjeta */
+  height: 500px; /* Tamaño de la tarjeta */
+  background: white;
+  border-radius: 32px;
+  padding: 3px;
+  position: relative;
+  box-shadow: #604b4a30 0px 70px 30px -50px;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  align-items: center; /* Centrar verticalmente el contenido */
+  justify-content: center; /* Centrar horizontalmente el contenido */
+}
+
+.card .profile-pic {
+  position: absolute;
+  width: 100%; /* Tamaño inicial de la imagen para que ocupe toda la tarjeta */
+  height: 100%; /* Tamaño inicial de la imagen para que ocupe toda la tarjeta */
+  top: 0;
+  left: 0;
+  border-radius: 29px;
+  z-index: 1;
+  border: 0px solid #fbb9b6;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.card .profile-pic img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: center; /* Asegurar que la imagen se centre en la tarjeta */
+  transition: all 0.5s ease-in-out;
+}
+
+.card .bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #717171;
+  border-radius: 29px;
+  z-index: 2;
+  box-shadow: rgba(96, 75, 74, 0.1882352941) 0px 5px 5px 0px inset;
+  overflow: hidden;
+  padding: 1rem;
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card .bottom .content {
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.no-bullets {
+  list-style-type: none; /* Quita las viñetas */
+  padding: 0; /* Elimina el espacio interior */
+  margin: 0; /* Elimina el espacio exterior */
+}
+
+.card .bottom .content .name {
+  font-size: 1.5rem; /* Tamaño del nombre más grande */
+  color: white;
+  font-weight: bold;
+}
+
+.card .bottom .content .about-me {
+  font-size: 1rem; /* Ajusta el tamaño del texto según lo necesites */
+  color: white;
+  margin-top: 1rem;
+}
+
+.card .bottom .bottom-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; /* Asegura que los botones estén en la parte inferior */
+}
+
+.card .bottom .bottom-bottom .more {
+  background: rgb(0, 0, 0);
+  color: #e6dad9;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem;
+  box-shadow: rgba(165, 132, 130, 0.1333333333) 0px 5px 5px 0px;
+  transition: background 0.3s ease;
+}
+
+.card .bottom .bottom-bottom .more:hover {
+  background: #f55d56;
+  color: white;
+}
+
+.card .bottom .bottom-bottom .heart {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.card .bottom .bottom-bottom .heart:hover {
+  color: #f55d56;
+}
+
+.card:hover .bottom {
+  transform: translateY(0%);
+}
+
+.card:hover .bottom .content {
+  opacity: 1;
+}
+
+.card:hover {
+  border-top-left-radius: 55px;
+}
+
+.card:hover .profile-pic {
+  width: 100%; /* La imagen ocupa la mitad de la tarjeta */
+  height: 100%; /* La imagen ocupa toda la tarjeta */
+  top: 0;
+  left: 50%; /* Mover la imagen a la mitad de la tarjeta */
+  transform: translateX(-50%); /* Centrar la imagen en la tarjeta */
+  border-radius: 0; /* Sin bordes redondeados */
+  transition: all 0.5s ease-in-out;
+}
+
+.card:hover .profile-pic img {
+  transition: all 0.5s ease-in-out;
+}
